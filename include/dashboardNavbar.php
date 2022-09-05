@@ -5,7 +5,7 @@
     </div>
     <div class="profile">
         <?php
-        echo '<img src="upload/profile/' . $row['image'] . '" alt="Profile" class="img-user">';
+        echo '<img src="../upload/profile/' . $row['image'] . '" alt="Profile" class="img-user">';
         ?>
     </div>
     <h3 class="user_name"><?php echo $row['fullname']; ?></h3>

@@ -1,4 +1,3 @@
-<!-- <?php include 'include/loginAuth.php' ?> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +10,7 @@
 
     <!-- Custom CSS-->
     <link rel="stylesheet" href="styles/signup.css">
+
     <title>SignUp Page</title>
 
 </head>
@@ -48,7 +48,7 @@
                         </div>
                     </form>
                     <div class=" text-center account">
-                        <span>Already have an account? <a href="signup.php"><Label style="color: #2ccd59;"><u>Login Now!</u></Label></a> </span>
+                        <span>Already have an account? <a href="login.php"><Label style="color: #2ccd59;"><u>Login Now!</u></Label></a> </span>
                     </div>
                 </div>
 

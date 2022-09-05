@@ -30,8 +30,8 @@
                 <p class="text-first">Manage Your Contact</p>
                 <p class="text-second">All important contact at one place</p>
                 <div class="btn">
-                    <a href="login.html"><button class="font-weight-bold btn1">Login</button></a>
-                    <a href="signup.html"><button class="font-weight-bold btn2">Create an Account</button></a>
+                    <a href="login.php"><button class="font-weight-bold btn1">Login</button></a>
+                    <a href="signup.php"><button class="font-weight-bold btn2">Create an Account</button></a>
                 </div>
             </div>
         </div>

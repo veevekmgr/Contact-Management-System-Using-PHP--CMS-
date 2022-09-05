@@ -30,10 +30,10 @@ if (isset($_POST['submit'])) {
             $_SESSION['PASSWORD'] = $result['password'];
             $msg = 'Welcome';
             if ($role == 'admin') {
-                echo "<script>alert('Login Succes');document.location='../adminDashboard.php';</script>";
+                echo "<script>alert('Login Succes');document.location='../admin/adminDashboard.php';</script>";
                 die();
             } else {
-                echo "<script>alert('Login Succes');document.location='../userdashboard.php';</script>";
+                echo "<script>alert('Login Succes');document.location='../user/userdashboard.php';</script>";
                 die();
             }
         } else {
