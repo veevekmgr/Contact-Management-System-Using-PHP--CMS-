@@ -152,7 +152,7 @@ a {
 }
 
 .icon-5 {
-    color: #70d7a5;
+    color: #eb2626;
 }
 
 .icon-6 {
@@ -570,11 +570,15 @@ footer {
 }
 
 .btn-2 {
-    background: #85ade3;
+    background: #ec4864;
 }
 
 .btn-3 {
-    background: #c5bc58;
+    background: #30dada;
+}
+
+.btn-4 {
+    background: #dfc553;
 }
 
 

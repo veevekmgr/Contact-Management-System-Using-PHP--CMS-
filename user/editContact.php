@@ -36,6 +36,9 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
         <?php include 'include/userSidebar.php'; ?>
 
         <div class="main--content">
+            <div class="title">
+                <h2 class="section--title">Edit Contact</h2>
+            </div>
             <div class="passwordForm">
                 <h2>Update Image and Document </h2>
                 <div class="container">
@@ -74,10 +77,10 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
                         $stmt_fetchData->execute();
                         $result_fetchData = $stmt_fetchData->fetch(PDO::FETCH_ASSOC);
                         ?>
-                        <input type="text" id="name" name="editFullname" class="form__input" value="<?php echo $result_fetchData['contactname']; ?>">
-                        <input type="email" id="email" name="editEmail" class="form__input" value="<?php echo $result_fetchData['contactemail']; ?>">
-                        <input type="number" id="mobile" name="editMobileno" class="form__input" value="<?php echo $result_fetchData['contactnumber']; ?>">
-                        <input type="text" id="address" name="editAddress" class="form__input" value="<?php echo $result_fetchData['address']; ?>">
+                        <input type="text" id="name" name="editFullname" class="form__input" value="<?php echo $result_fetchData['contactname']; ?>" required>
+                        <input type="email" id="email" name="editEmail" class="form__input" value="<?php echo $result_fetchData['contactemail']; ?>" required>
+                        <input type="number" id="mobile" name="editMobileno" class="form__input" value="<?php echo $result_fetchData['contactnumber']; ?>" required>
+                        <input type="text" id="address" name="editAddress" class="form__input" value="<?php echo $result_fetchData['address']; ?>" required>
 
                         <div class="form-check">
                             <input type="submit" name="submit" value="Update" class="btn btn-Add">

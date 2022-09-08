@@ -33,8 +33,8 @@ try {
         $email = $_POST['email'];
         $role = 'user';
         $username = $_POST['username'];
-        $password = md5($_POST['password']);
-        $conPass = md5($_POST['conpassword']);
+        $password = $_POST['password'];
+        $conPass = $_POST['conpassword'];
         //$vkey = md5(time() . $username);
 
 
@@ -44,23 +44,23 @@ try {
         $result->execute();
         $count = $result->rowCount();
         if ($count > 0) {
-            header('Location: ../signup.php?msg=Username Already Taken');
+            echo "<script> alert('Username already exist!');document.location='../signup.php';</script>";
         } elseif (!in_array($docExt, $valid_doc_extensions)) {
-            header('Location: ../signup.php?msg=Only image extension allowed document');
+            echo "<script> alert('Only pdf,doc,docx image allowed');document.location='../signup.php';</script>";
         } elseif (!in_array($imgExt, $valid_extensions)) {
-            header('Location: ../signup.php?msg=Only image extension allowed');
+            echo "<script> alert('Only png,jpg,jpeg document allowed');document.location='../signup.php';</script>";
         } elseif (strlen($username) < 5) {
-            header('Location: ../signup.php?msg=Username too short');
+            echo "<script> alert('Username too short');document.location='../signup.php';</script>";
         } elseif ($password != $conPass) {
-            header('Location: ../signup.php?msg=Password not matched');
+            echo "<script> alert('Password not matched');document.location='../signup.php';</script>";
         } elseif (strlen($password) < 8) {
-            header('Location: ../signup.php?msg=Password should be of 8 digits.');
+            echo "<script> alert('Password too short! should be greater then 8 digits');document.location='../signup.php';</script>";
         } elseif (!preg_match("/^[a-zA-z\s]*$/", $fullname)) {
-            header('Location: ../signup.php?msg=Special characters or number not allowed');
+            echo "<script> alert('Invalid Fullname');document.location='../signup.php';</script>";
         } elseif (!preg_match("/^[0-9]*$/", $contact)) {
-            header('Location: ../signup.php?msg=Only number allowed ');
+            echo "<script> alert('Invalid mobile number');document.location='../signup.php';</script>";
         } elseif (strlen($contact) != 10) {
-            header(' Location: ../signup.php?msg=Number should be 10 digits.');
+            echo "<script> alert('Mobile number should be of 10 digits');document.location='../signup.php';</script>";
         } else {
 
             //move uploaded files to local drive
@@ -68,7 +68,7 @@ try {
             move_uploaded_file($doc_tmp_dir, $doc_upload_dir . $userDoc);
 
             //insert into database
-            $sql = "INSERT INTO user(username,password,role,image,fullname,contact,email,userDocument,date) VALUES ('$username', '$password' ,'$role','$picProfile','$fullname','$contact','$email','$userDoc', NOW())";
+            $sql = "INSERT INTO user(username,password,role,image,fullname,contact,email,userDocument,date) VALUES ('$username', md5('$password') ,'$role','$picProfile','$fullname','$contact','$email','$userDoc', NOW())";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
 

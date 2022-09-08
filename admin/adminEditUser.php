@@ -1,9 +1,10 @@
 <?php
-include '../include/topInclude.php';
-if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
-    $username = $_SESSION['NAME'];
-?>
+include '../include/topInclude.php'; ?>
+<?php $userName = $_GET['username'];
 
+if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') {
+
+?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -23,7 +24,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
         <!--Database Data fetch-->
         <?php include '../include/dataFetch.php'; ?>
 
-        <title>Setting</title>
+        <title>Edit User</title>
 
     </head>
     <!--Navbar-->
@@ -33,20 +34,21 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
     <section class="main">
 
         <!--Sidebar Started-->
-        <?php include 'include/userSidebar.php'; ?>
+        <?php include 'adminSidebar.php'; ?>
 
         <div class="main--content">
             <div class="title">
-                <h2 class="section--title">Edit Profile</h2>
+                <h2 class="section--title">Edit User</h2>
             </div>
             <div class="passwordForm">
                 <h2>Change Password</h2>
                 <div class="container">
-                    <form action="include/changePassword.php" method="POST" class="addContact">
-                        <input type="password" id="oldpass" name="oldPassword" class="form__input" placeholder="Old Password">
-                        <input type="password" id="newpass" name="newPassword" class="form__input" placeholder="New Password">
-                        <input type="password" id="conpass" name="conPassword" class="form__input" placeholder="Confirm Password">
 
+
+                    <!-- Change Password Form -->
+                    <form action="adminChangePassword.php?username=<?php echo $userName; ?>" method="POST" class="addContact">
+                        <input type="password" id="newpass" name="newPassword" class="form__input" placeholder="New Password" required>
+                        <input type="password" id="conpass" name="conPassword" class="form__input" placeholder="Confirm Password" required>
                         <div class="form-check">
                             <input type="submit" name="submit" value="Change" class="btn btn-Add">
                         </div>
@@ -58,7 +60,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
             <div class="passwordForm">
                 <h2>Update Image and Document </h2>
                 <div class="container">
-                    <form action="include/editProfile.php" method="POST" class="addContact" enctype="multipart/form-data">
+                    <form action="adminEditProfile.php?username=<?php echo $userName; ?>" method="POST" class="addContact" enctype="multipart/form-data">
                         <?php
                         $username = $_SESSION['NAME'];
 
@@ -92,18 +94,18 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
             <div class="editUserForm">
                 <h2>Edit Details</h2>
                 <div class="container">
-                    <form action="include/editProfile.php" method="POST" class="addContact" enctype="multipart/form-data">
+                    <form action="adminEditProfile.php?username=<?php echo $userName; ?>" method="POST" class="addContact" enctype="multipart/form-data">
                         <?php
-                        $username = $_SESSION['NAME'];
+                        $username = $_GET['username'];
 
                         $sql_fetchData = "SELECT * FROM USER WHERE username = '$username'";
                         $stmt_fetchData = $conn->prepare($sql_fetchData);
                         $stmt_fetchData->execute();
                         $result_fetchData = $stmt_fetchData->fetch(PDO::FETCH_ASSOC);
                         ?>
-                        <input type="text" id="name" name="editFullname" class="form__input" value="<?php echo $result_fetchData['fullname']; ?>">
-                        <input type="email" id="email" name="editEmail" class="form__input" value="<?php echo $result_fetchData['email']; ?>">
-                        <input type="mobile" id="mobile" name="editMobileno" class="form__input" value="<?php echo $result_fetchData['contact']; ?>">
+                        <input type="text" id="name" name="editFullname" class="form__input" value="<?php echo $result_fetchData['fullname']; ?>" required>
+                        <input type="email" id="email" name="editEmail" class="form__input" value="<?php echo $result_fetchData['email']; ?>" required>
+                        <input type="mobile" id="mobile" name="editMobileno" class="form__input" value="<?php echo $result_fetchData['contact']; ?>" required>
 
                         <div class="form-check">
                             <input type="submit" name="submit" value="Update" class="btn btn-Add">
@@ -113,10 +115,11 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
                 </div>
             </div>
         </div>
-        <script src="main.js"></script>
+        <?php include '../include/footer.php'; ?>
         </body>
 
     </html>
+
 <?php } else {
-    echo "<script>alert('You can't access this section!');document.location='../login.php';</script>";
+    echo "<script> alert('No permission to enter this section');document.location='../login.php';</script>";
 } ?>

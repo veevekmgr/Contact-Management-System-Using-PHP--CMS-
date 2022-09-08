@@ -1,7 +1,8 @@
 <?php
-include '../include/dbConn.php';
-$conn = openConn();
+include '../include/topInclude.php';
+
 $contactId = $_GET['id'];
+$username = $_SESSION['NAME'];
 
 $sql_contact = "SELECT * FROM contact WHERE id = '$contactId'";
 $stmt_contact = $conn->prepare($sql_contact);
@@ -18,8 +19,7 @@ if ($stmt_Delete) {
     $sql_log = "INSERT INTO logs(username,date,section,logs) VALUES ('$username',NOW(),'$log_section','$log_msg')";
     $stmt = $conn->prepare($sql_log);
     $stmt->execute();
-    echo "<script> alert('Success');document.location='./contact.php';</script>";
+    echo "<script>alert('Deleted Successfully');document.location='contact.php';</script>";
 } else {
     $e->message();
 }
-echo "<script>alert('Deleted Successfully');document.location='./contact.php'</script>";

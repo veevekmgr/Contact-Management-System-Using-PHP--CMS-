@@ -44,6 +44,15 @@
         </div>
     </section>
     <!--Footer PHP-->
+    <footer class="page-footer fixed-bottom">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2022
+            Veevek Magar
+        </div>
+        <!-- Copyright -->
+
+    </footer>
     <?php include 'include/footer.php' ?>
 
     <!--Login Authentication-->

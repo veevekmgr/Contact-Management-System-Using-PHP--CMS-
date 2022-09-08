@@ -47,7 +47,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') {
         <section class="main">
 
             <!--Sidebar Started-->
-            <?php include 'include/adminSidebar.php'; ?>
+            <?php include 'adminSidebar.php'; ?>
             <!--Sidebar End-->
 
             <!--Main Content Start-->
@@ -78,7 +78,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') {
 
                                 </tr>
                             </thead>
-                            <?php include 'include/adminSearchUser.php'; ?>
+                            <?php include 'adminSearchUser.php'; ?>
                         </table>
                     </div>
                     <!-- Pagination -->

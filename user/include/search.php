@@ -1,55 +1,69 @@
 <tbody>
     <?php
+    $user = $_SESSION['NAME'];
     // Search Data 
-    if (isset($_POST['search'])) {
-        $searchData = $_POST['search'];
+    $sql_user = "SELECT * FROM contact WHERE username = '$user' ORDER BY username LIMIT 6";
+    $stmt_user = $conn->prepare($sql_user);
+    $stmt_user->execute();
+    $data_Count = $stmt_user->rowCount();
 
-        $min_length = 3;
-        //Check search data length
-        if (strlen($searchData) >= $min_length) {
-            $searchData = htmlspecialchars($searchData);
+    if ($data_Count == 0) { ?>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="color:crimson;">No Contact Found!!</td>
+        </tr>
+        <?php
+    } else {
+        if (isset($_POST['search'])) {
+            $searchData = $_POST['search'];
 
-            $stmt_sql = $conn->prepare("SELECT * FROM contact WHERE (contactname LIKE '%" . $searchData . "%') LIMIT $starting_limit,$perPage");
-            $stmt_sql->execute();
-            $row = $stmt_sql->rowCount();
+            $min_length = 3;
+            //Check search data length
+            if (strlen($searchData) >= $min_length) {
+                $searchData = htmlspecialchars($searchData);
 
-            //Check how much data is available that has been searched
-            if ($row > 0) {
-                while ($row_Contacts = $stmt_sql->fetch(PDO::FETCH_ASSOC)) { ?>
-                    <tr>
+                $stmt_sql = $conn->prepare("SELECT * FROM contact WHERE (contactname LIKE '%" . $searchData . "%') LIMIT $starting_limit,$perPage");
+                $stmt_sql->execute();
+                $row = $stmt_sql->rowCount();
 
-                        <td><?php echo "<img src='../upload/Contact/profile/" . $row_Contacts['image'] . "' alt='user' class='img-contactUser'>"; ?></td>
-                        <td><?php echo $row_Contacts['contactname']; ?></td>
-                        <td><?php echo $row_Contacts['contactnumber']; ?><br>
-                            <?php echo $row_Contacts['contactemail']; ?><br>
-                            <?php echo $row_Contacts['address']; ?></td>
+                //Check how much data is available that has been searched
+                if ($row > 0) {
+                    while ($row_Contacts = $stmt_sql->fetch(PDO::FETCH_ASSOC)) { ?>
+                        <tr>
 
-                        <td><?php echo $row_Contacts['date']; ?></td>
-                        <td>
-                            <a href='./viewContactDoc.php?username=<?php echo $row_Contacts['contactname']; ?>' class="btn-action btn-1">View Document</a>
-                            <a href='./deleteContact.php?id=<?php echo $row_Contacts['id']; ?>' class="btn-action btn-2">Delete</a>
-                            <a href='editContact.php?id=<?php echo $row_Contacts['id']; ?>' class="btn-action btn-3">Edit</a>
-                        </td>
-                    </tr>
-        <?php  }
-                //If no result found
+                            <td><?php echo "<img src='../../upload/Contact/profile/" . $row_Contacts['image'] . "' alt='user' class='img-contactUser'>"; ?></td>
+                            <td><?php echo $row_Contacts['contactname']; ?></td>
+                            <td><?php echo $row_Contacts['contactnumber']; ?><br>
+                                <?php echo $row_Contacts['contactemail']; ?><br>
+                                <?php echo $row_Contacts['address']; ?></td>
+
+                            <td><?php echo $row_Contacts['date']; ?></td>
+                            <td>
+                                <a href='./viewContactDoc.php?username=<?php echo $row_Contacts['contactname']; ?>' class="btn-action btn-1">View Document</a>
+                                <a href='./deleteContact.php?id=<?php echo $row_Contacts['id']; ?>' class="btn-action btn-2">Delete</a>
+                                <a href='editContact.php?id=<?php echo $row_Contacts['id']; ?>' class="btn-action btn-3">Edit</a>
+                            </td>
+                        </tr>
+            <?php  }
+                    //If no result found
+                } else {
+                    echo "<script>alert('No result Found');document.location='contact.php';</script>";
+                }
+
+                //If character is less then 3 digits
             } else {
-                echo "<script>alert('No result Found');document.location='contact.php';</script>";
+                echo "<script>alert('Search character should be greater than 3 digits.');document.location='contact.php';</script>";
             }
 
-            //If character is less then 3 digits
-        } else {
-            echo "<script>alert('Search character should be greater than 3 digits.');document.location='contact.php';</script>";
-        }
-
-        //Default Table value
-    } else { ?>
+            //Default Table value
+        } else { ?>
 <tbody>
     <?php
-        $sql_Contact = "SELECT * FROM contact WHERE username = '$username' LIMIT $starting_limit,$perPage";
-        $stmt_Contact = $conn->prepare($sql_Contact);
-        $stmt_Contact->execute();
-        while ($row_Contact = $stmt_Contact->fetch(PDO::FETCH_ASSOC)) { ?>
+            $sql_Contact = "SELECT * FROM contact WHERE username = '$username' LIMIT $starting_limit,$perPage";
+            $stmt_Contact = $conn->prepare($sql_Contact);
+            $stmt_Contact->execute();
+            while ($row_Contact = $stmt_Contact->fetch(PDO::FETCH_ASSOC)) { ?>
         <tr>
 
             <td><?php echo "<img src='../upload/Contact/profile/" . $row_Contact['image'] . "' alt='user' class='img-contactUser'>"; ?></td>
@@ -71,5 +85,6 @@
     ?>
 </tbody>
 <?php
+        }
     } ?>
 </tbody>

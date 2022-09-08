@@ -43,13 +43,13 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'user') {
                             <!-- addContact Form -->
                             <form class="addContact-form" name="addContactForm" action="include/addContactForm.php" method="POST" enctype="multipart/form-data">
                                 <div class="mt-3">
-                                    <label for="formFile" class="form-label" style="color: rgb(148, 145, 145) ; font-size: 2em;">Upload Profile Picture<span class="text-danger"> (*Only png,jpg & jpeg.)</span></label>
+                                    <label for="formFile" class="form-label" style="color: rgb(148, 145, 145) ; font-size: 2em;">Upload Profile Picture<span class="text-danger" style="font-size: 0.6em;"> (*Only png,jpg & jpeg.)</span></label>
                                     <input class="form-control" type="file" id="userProfile" name="userProfile">
                                 </div>
-                                <input type="text" id="name" name="name" class="form__input" placeholder="Fullname">
-                                <input type="email" id="email" name="email" class="form__input" placeholder="Email">
-                                <input type="text" id="address" name="address" class="form__input" placeholder="Address">
-                                <input type="mobile" id="mobile" name="mobileno" class="form__input" placeholder="Mobile Number">
+                                <input type="text" id="name" name="name" class="form__input" placeholder="Fullname" required>
+                                <input type="email" id="email" name="email" class="form__input" placeholder="Email" required>
+                                <input type="text" id="address" name="address" class="form__input" placeholder="Address" required>
+                                <input type="mobile" id="mobile" name="mobileno" class="form__input" placeholder="Mobile Number" required>
                                 <div class="mt-4">
                                     <label for="formFile" class="form-label" style="color: rgb(148, 145, 145) ; font-size: 2em;">Upload Documents (National Identity)<span class="text-danger" style="font-size: 0.6em;"> (*Only pdf,docx & docx.)</span></label>
                                     <input class="form-control" type="file" id="userDoc" name="userDoc">

@@ -33,19 +33,19 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') { ?>
     <section class="main">
 
         <!--Sidebar Started-->
-        <?php include 'include/adminSidebar.php'; ?>
+        <?php include 'adminSidebar.php'; ?>
 
         <div class="main--content">
             <div class="passwordForm">
                 <h2>Change Password</h2>
                 <div class="container">
-                    <form action="include/adminChangePassword.php" method="POST" class="addContact">
-                        <input type="password" id="oldpass" name="oldPassword" class="form__input" placeholder="Old Password">
-                        <input type="password" id="newpass" name="newPassword" class="form__input" placeholder="New Password">
-                        <input type="password" id="conpass" name="conPassword" class="form__input" placeholder="Confirm Password">
+                    <form action="editProfile.php" method="POST" class="addContact">
+                        <input type="password" id="oldpass" name="oldPassword" class="form__input" placeholder="Old Password" required>
+                        <input type="password" id="newpass" name="newPassword" class="form__input" placeholder="New Password" required>
+                        <input type="password" id="conpass" name="conPassword" class="form__input" placeholder="Confirm Password" required>
 
                         <div class="form-check">
-                            <input type="submit" name="submit" value="Add" class="btn btn-Add">
+                            <input type="submit" name="submit-Pass" value="Change" class="btn btn-Add">
                         </div>
                     </form>
 
@@ -55,7 +55,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') { ?>
             <div class="passwordForm">
                 <h2>Update Image and Document </h2>
                 <div class="container">
-                    <form action="include/editProfile.php" method="POST" class="addContact" enctype="multipart/form-data">
+                    <form action="editProfile.php" method="POST" class="addContact" enctype="multipart/form-data">
                         <?php
                         $username = $_SESSION['NAME'];
 
@@ -89,7 +89,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') { ?>
             <div class="editUserForm">
                 <h2>Edit Details</h2>
                 <div class="container">
-                    <form action="include/editProfile.php" method="POST" class="addContact" enctype="multipart/form-data">
+                    <form action="editProfile.php" method="POST" class="addContact" enctype="multipart/form-data">
                         <?php
                         $username = $_SESSION['NAME'];
 
@@ -98,9 +98,9 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') { ?>
                         $stmt_fetchData->execute();
                         $result_fetchData = $stmt_fetchData->fetch(PDO::FETCH_ASSOC);
                         ?>
-                        <input type="text" id="name" name="editFullname" class="form__input" value="<?php echo $result_fetchData['fullname']; ?>">
-                        <input type="email" id="email" name="editEmail" class="form__input" value="<?php echo $result_fetchData['email']; ?>">
-                        <input type="mobile" id="mobile" name="editMobileno" class="form__input" value="<?php echo $result_fetchData['contact']; ?>">
+                        <input type="text" id="name" name="editFullname" class="form__input" value="<?php echo $result_fetchData['fullname']; ?>" required>
+                        <input type="email" id="email" name="editEmail" class="form__input" value="<?php echo $result_fetchData['email']; ?>" required>
+                        <input type="mobile" id="mobile" name="editMobileno" class="form__input" value="<?php echo $result_fetchData['contact']; ?>" required>
 
                         <div class="form-check">
                             <input type="submit" name="submit" value="Update" class="btn btn-Add">

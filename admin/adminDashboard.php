@@ -31,7 +31,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') {
         <section class="main">
 
             <!--Sidebar Started-->
-            <?php include 'include/adminSidebar.php'; ?>
+            <?php include 'adminSidebar.php'; ?>
 
             <!--Sidebar End-->
 
@@ -44,7 +44,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') {
                     </div>
 
                     <!--Dashboard Cards-->
-                    <?php include 'include/adminDashCards.php'; ?>
+                    <?php include 'adminDashCards.php'; ?>
                     <!--Dashboard Cards End-->
                 </div>
 
@@ -52,7 +52,7 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') {
                 <div class="recent--statement">
                     <div class="title">
                         <h2 class="section--title">Users</h2>
-                        <a href="statement.php">
+                        <a href="adminUser.php">
                             <button class="btn-viewAll">View All</button>
                         </a>
                     </div>
@@ -78,25 +78,34 @@ if (isset($_SESSION['NAME']) && $_SESSION['ROLE'] == 'admin') {
                                 $sql_user = "SELECT * FROM user ORDER BY username LIMIT 6";
                                 $stmt_user = $conn->prepare($sql_user);
                                 $stmt_user->execute();
-                                while ($row_user = $stmt_user->fetch(PDO::FETCH_ASSOC)) {
-                                    if ($row_user['role'] == 'user') { ?>
-                                        <tr>
-                                            <!-- <td></td> -->
-                                            <td><?php echo "<img src='../upload/profile/" . $row_user['image'] . "' alt='user' class='img-contactUser'>"; ?></td>
-                                            <td><?php echo $row_user['username']; ?></td>
-                                            <td><?php echo $row_user['fullname']; ?></td>
-                                            <td><?php echo $row_user['role']; ?></td>
-                                            <td><?php echo $row_user['contact']; ?><br>
-                                                <?php echo $row_user['email']; ?></td>
-                                            <td><?php echo $row_user['date']; ?></td>
-                                            <td>
-                                                <a href='include/viewDocument.php?username=<?php echo $row_user['username']; ?>' class="btn-action btn-1">View Document</a>
-                                                <a href='include/deleteUser.php?id=<?php echo $row_user['id']; ?>' class="btn-action btn-2">Delete User</a>
-                                                <a href='include/adminEditUser.php?username=<?php echo $row_user['username']; ?>' class="btn-action btn-3">Edit User</a>
-                                                <a href='include/adminStatement.php?username=<?php echo $row_user['username']; ?>' class="btn-action btn-1">View Statements</a>
-                                            </td>
-                                        </tr>
+                                $data_Count = $stmt_user->rowCount();
+
+                                if ($data_Count == 1) { ?>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="color:crimson">No User Found</td>
+                                    <?php
+                                } else {
+                                    while ($row_user = $stmt_user->fetch(PDO::FETCH_ASSOC)) {
+                                        if ($row_user['role'] == 'user') { ?>
+                                            <tr>
+                                                <!-- <td></td> -->
+                                                <td><?php echo "<img src='../upload/profile/" . $row_user['image'] . "' alt='user' class='img-contactUser'>"; ?></td>
+                                                <td><?php echo $row_user['username']; ?></td>
+                                                <td><?php echo $row_user['fullname']; ?></td>
+                                                <td><?php echo $row_user['role']; ?></td>
+                                                <td><?php echo $row_user['contact']; ?><br>
+                                                    <?php echo $row_user['email']; ?></td>
+                                                <td><?php echo $row_user['date']; ?></td>
+                                                <td>
+                                                    <a href='viewDocument.php?username=<?php echo $row_user['username']; ?>' class="btn-action btn-1">View Document</a>
+                                                    <a href='deleteUser.php?id=<?php echo $row_user['id']; ?>' class="btn-action btn-2">Delete User</a>
+                                                    <a href='adminEditUser.php?username=<?php echo $row_user['username']; ?>' class="btn-action btn-3">Edit User</a>
+                                                    <a href='adminStatement.php?username=<?php echo $row_user['username']; ?>' class="btn-action btn-4">View Statements</a>
+                                                </td>
+                                            </tr>
                                 <?php }
+                                    }
                                 }
                                 ?>
                             </tbody>

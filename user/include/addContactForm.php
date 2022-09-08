@@ -37,20 +37,16 @@ try {
 
 
         //Validations
-        $query = "SELECT username FROM contact WHERE contactname='$fullname'";
-        $result = $conn->prepare($query);
-        $result->execute();
-        $count = $result->rowCount();
-        if (!in_array($docExt, $valid_doc_extensions)) {
-            header('Location: ../addContact.php?msg=Only image extension allowed document');
+        // $query = "SELECT username FROM contact WHERE contactname='$fullname'";
+        // $result = $conn->prepare($query);
+        // $result->execute();
+        // $count = $result->rowCount();
+        if (empty($fullname) || empty($address) || empty($contact) || empty($email) || empty($picProfile) || empty($userDoc)) {
+            echo "<script> alert('Field cannot be empty');document.location='../addContact.php';</script>";
+        } elseif (!in_array($docExt, $valid_doc_extensions)) {
+            echo "<script> alert('Only jpg,png,jpeg image allowed');document.location='../addContact.php';</script>";
         } elseif (!in_array($imgExt, $valid_extensions)) {
-            header('Location: ../addContact.php?msg=Only image extension allowed');
-        } elseif (!preg_match("/^[a-zA-z\s]*$/", $fullname)) {
-            header('Location: ../addContact.php?msg=Special characters or number not allowed');
-        } elseif (!preg_match("/^[0-9]*$/", $contact)) {
-            header('Location: ../addContact.php?msg=Only number allowed ');
-        } elseif (strlen($contact) != 10) {
-            header(' Location: ../addContact.php?msg=Number should be 10 digits.');
+            echo "<script> alert('Only pdf,doc,docx document allowed');document.location='../addContact.php';</script>";
         } else {
 
             //move uploaded files to local drive
@@ -61,7 +57,6 @@ try {
             $sql = "INSERT INTO contact(username,contactname,contactemail,contactnumber,address,image,document,date) VALUES ('$username','$fullname','$email','$contact','$address','$picProfile','$userDoc', NOW())";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-
 
             //Check query 
             if ($stmt) {

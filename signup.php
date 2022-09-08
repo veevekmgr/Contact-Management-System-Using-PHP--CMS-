@@ -32,12 +32,12 @@
                             <label for="formFile" class="form-label" style="color: rgb(148, 145, 145) ; font-size: 2em;">Upload your Profile <span class="text-danger"> (*Only png,jpg & jpeg.)</span></label>
                             <input class="form-control" type="file" id="userProfile" name="userProfile">
                         </div>
-                        <input type="text" id="user" name="username" class="form__input" placeholder="Username">
-                        <input type="text" id="name" name="fullname" class="form__input" placeholder="Fullname">
-                        <input type="email" id="email" name="email" class="form__input" placeholder="Email">
-                        <input type="mobile" id="mobile" name="mobileno" class="form__input" placeholder="Mobile Number">
-                        <input type="password" id="pass" name="password" class="form__input" placeholder="Password">
-                        <input type="password" id="conpass" name="conpassword" class="form__input" placeholder="Confirm Password">
+                        <input type="text" id="user" name="username" class="form__input" placeholder="Username" required>
+                        <input type="text" id="name" name="fullname" class="form__input" placeholder="Fullname" required>
+                        <input type="email" id="email" name="email" class="form__input" placeholder="Email" required>
+                        <input type="mobile" id="mobile" name="mobileno" class="form__input" placeholder="Mobile Number" required>
+                        <input type="password" id="pass" name="password" class="form__input" placeholder="Password" required>
+                        <input type="password" id="conpass" name="conpassword" class="form__input" placeholder="Confirm Password" required>
                         <div class="mt-4">
                             <label for="formFile" class="form-label" style="color: rgb(148, 145, 145) ; font-size: 2em;">Upload your Documents <span class="text-danger"> (*Only pdf,docx & docx.)</span></label>
                             <input class="form-control" type="file" id="userDoc" name="userDoc">
@@ -56,6 +56,15 @@
         </div>
     </section>
     <!--Footer PHP-->
+    <footer class="page-footer fixed-bottom">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2022
+            Veevek Magar
+        </div>
+        <!-- Copyright -->
+
+    </footer>
     <?php include 'include/footer.php'; ?>
 
     <!--Login Authentication-->
